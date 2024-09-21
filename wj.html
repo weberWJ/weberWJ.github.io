@@ -12,28 +12,28 @@
             text-align: center;
             font-style: oblique;
         }
-        
         body{
-            background-repeat: no-repeat;
-            background-size: cover;
-            background-image: url();
+            font-size: 20px;
         }
-        image{
-            width:1200px;
-            height: auto;
+        p{
+            border: 0.1px solid rgb(234, 234, 243);
+            font-size: 40px;
+            height: 33%;
+            margin: 5px;
         }
+        
         header{
-            height: 30%;
+            height: 20%;
             background-color: antiquewhite;
-            line-height: 150px;
+            line-height: 200px;
         }
         main{
-            height: 50%;
+            height: 70%;
             background-color:aquamarine;
             line-height: 280px;
         }
         footer{
-            height: 20%;
+            height: 10%;
             background-color: black;
             color: aliceblue;
             line-height: 100px;
@@ -45,18 +45,42 @@
       welcome to WJ home
     </header>
      <main>
-      ENJOY YOURSELF
+        <p id="word">abandon</p>
+        <p id="pron">/ə'bændən/</p>
+        <p id="chinese">vt.离弃,丢弃;遗弃,抛弃;放弃</p>
+
      </main>
      <footer>
       江西科技师范大学 王靖 
      </footer>
      <script>
         let a=Date.now();
-    
         document.body.style.height = innerHeight+"px";
         let c=Date.now();
-     
         console.log(c-a);
+
+        let strCET6='';
+        let arrCET6=[];
+        fetch('cet6.txt')
+        .then(res =>res.text())
+        .then(txt =>{
+            strCET6=txt;
+            arrCET6=strCET6.split('\r\n');
+            let rand=Math.floor(arrCET6.length*Math.random());
+            let cetWord=arrCET6[rand];
+            let begin=cetWord.indexOf('\t');
+            let end=cetWord.lastIndexOf('\t');
+            let word=cetWord.slice(0,begin);
+            let pron=cetWord.slice(begin+1,end);
+            let chinese=cetWord.slice(end+1);
+            select('#word').textContent=word;
+            select('#pron').textContent=pron;
+            select('#chinese').textContent=chinese;
+        });
+        function select(str){
+            let dom=document.querySelector(str);
+            return dom;
+        }
      </script>
 </body>
 </html>
