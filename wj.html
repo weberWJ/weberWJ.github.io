@@ -24,26 +24,42 @@
         nav{
             height: 7%;
             font-size: 1.2em;
-            text-align: left;
+            text-align: center;
         }
         header{
-            height: 20%;
+            height: 30%;
             background-color: antiquewhite;
             line-height: 150px;
         }
         main{
-            height: 65%;
+            height: 50%;
             background-color:aquamarine;
             line-height: 100px;
         }
         footer{
-            height: 25%;
+            height: 20%;
             background-color: black;
             color: aliceblue;
             line-height: 100px;
         }
     </style>
+     <script>
+        let Model = {} ;
+        Model.cet6String = '' ;
+        Model.CET6 = [] ;
+        Model.cetUrl = ['text1.txt','text2.txt','text3.txt'];
+        for(let i=0; i<Model.cetUrl.length; i++){
+            fetch(Model.cetUrl[i])
+            .then(res => res.text())
+            .then(txt => {
+                Model.cet6String += txt ;
+                UI.log('单词库：' + Model.cetUrl[i] + ' 加载成功!') ;       
+            });
+          } ;
+      
+    </script>
 </head>
+ 
 <body>
     <header>
       welcome to WJ home
@@ -52,12 +68,47 @@
         <p id="word">abandon</p>
         <p id="pron">/ə'bændən/</p>
         <p id="chinese">vt.离弃,丢弃;遗弃,抛弃;放弃</p>
-        <form>
-            <input type=button value=刷新 onclick="location.replace(location)">
-        </form>
-     
+        <nav>
+            <button id="randWord">随机单词</button>
+            <button id="loadWord">读入单词</button>
+            <input type=button value=刷新  onclick="location.replace(location)">
+        </nav>     
      <footer>
       江西科技师范大学 王靖 
+      <script>
+        let UI = {} ;
+         UI.log = function(s){
+         select('footer').textContent = s ;
+         } ;
+         UI.headerLog = function(s){
+         select('header').textContent = s ;
+         } ;
+         select('button#loadWord').onclick = function(){
+           Model.CET6 = Model.cet6String.split('\r\n') ;
+   
+           if(Model.CET6.length < 5000){
+               UI.log("单词没有完全读入，Please wait!");
+           }else{
+               UI.log("我已经读入了"+ Model.CET6.length + "单词!")
+           }
+           
+         } ;
+         select('button#randWord').onclick = function(){
+                   
+           if(Model.CET6.length < 5000){
+               UI.log("请点“读入单词”按钮");
+           }else{
+               let rand = Math.floor(Math.random() * Model.CET6.length) ;
+               UI.headerLog(Model.CET6[rand] ) ;
+               UI.log("我已经读入了"+ Model.CET6.length + "单词!")
+           }
+           
+         } ;
+        function select(selector){
+           let dom = document.querySelector(selector) ;
+           return dom ;
+         }
+       </script>
       <nav>
         <ul>
           <li><a href="#word">单词</a></li>
@@ -66,11 +117,11 @@
         </ul>
       </nav>
      </footer>
-     <script>
-        let a=Date.now();
-        document.body.style.height = innerHeight+"px";
-        let c=Date.now();
-        console.log(c-a);
+    <script>
+        // let a=Date.now();
+        // document.body.style.height = innerHeight+"px";
+        // let c=Date.now();
+        // console.log(c-a);
 
         let strCET6='';
         let arrCET6=[];
@@ -94,6 +145,6 @@
             let dom=document.querySelector(str);
             return dom;
         }
-     </script>
+     </script> 
 </body>
 </html>
