@@ -18,22 +18,26 @@
         p{
             border: 0.1px solid rgb(234, 234, 243);
             font-size: 40px;
-            height: 33%;
+            height: 25%;
             margin: 5px;
         }
-        
+        nav{
+            height: 7%;
+            font-size: 1.2em;
+            text-align: left;
+        }
         header{
             height: 20%;
             background-color: antiquewhite;
             line-height: 200px;
         }
         main{
-            height: 70%;
+            height: 65%;
             background-color:aquamarine;
-            line-height: 280px;
+            line-height: 120px;
         }
         footer{
-            height: 10%;
+            height: 20%;
             background-color: black;
             color: aliceblue;
             line-height: 100px;
@@ -48,10 +52,19 @@
         <p id="word">abandon</p>
         <p id="pron">/ə'bændən/</p>
         <p id="chinese">vt.离弃,丢弃;遗弃,抛弃;放弃</p>
-
-     </main>
+        <form>
+            <input type=button value=刷新 onclick="location.replace(location)">
+        </form>
+     
      <footer>
       江西科技师范大学 王靖 
+      <nav>
+        <ul>
+          <li><a href="#word">单词</a></li>
+          <li><a href="#pron">音标</a></li>
+          <li><a href="#chinese">翻译</a></li>
+        </ul>
+      </nav>
      </footer>
      <script>
         let a=Date.now();
